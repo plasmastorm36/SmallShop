@@ -10,6 +10,8 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 
 import java.time.LocalDate;
+import java.util.Collection;
+import java.util.HashSet;
 
 @Entity
 @Table(name = "Users")
@@ -67,6 +69,9 @@ public class User {
    @Column(name = "lastUpdated", nullable = false)
    private LocalDate lastUpdated;
 
+   @Column(name = "roles", nullable = true)
+   private HashSet<Role> roles;
+
    // GETTERS
 
    public long getId () {
@@ -105,6 +110,10 @@ public class User {
       return this.lastUpdated;
    }
 
+   public HashSet<Role> getRoles () {
+      return this.roles;
+   }
+
    // SETTERS
 
    public void setUserName (final String userName) {
@@ -139,10 +148,40 @@ public class User {
       this.lastUpdated = lastUpdated;
    }
 
-   // MISC
+   public void setRoles (final Set<Role> roles) {
+      this.roles = roles;
+   }
+
+   // UPDATE
 
    @PreUpdate
    public void PreUpdate() {
       this.lastUpdated = LocalDate.now();
+   }
+
+   // ROLE HANDLING
+
+   public void addRole(final Role role) {
+      if (roles == null) {
+         this.roles = new HashSet<Role>();
+      }  
+      
+      this.roles.add(role);
+   }
+
+   public void addRoles (final Collection<Role> roles) {
+      this.roles.addAll(roles);
+   }
+
+   public void removeRole (final Role role) {
+      this.roles.remove(role);
+   }
+
+   public void removeRole (final Collection<Role> roles) {
+      this.roles.removeAll(roles);
+   }
+
+   public void removeAllRoles () {
+      this.roles.removeAll(roles);
    }
 }
