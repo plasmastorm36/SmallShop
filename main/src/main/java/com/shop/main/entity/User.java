@@ -148,7 +148,7 @@ public class User {
       this.lastUpdated = lastUpdated;
    }
 
-   public void setRoles (final Set<Role> roles) {
+   public void setRoles (final HashSet<Role> roles) {
       this.roles = roles;
    }
 
