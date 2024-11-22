@@ -7,6 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
 
 import java.time.LocalDate;
 
@@ -43,6 +44,7 @@ public class User {
    @Column(name = "password", nullable = false)
    private String password;
 
+   @Email
    @Column(name = "email", nullable = false)
    private String email;
 
