@@ -13,13 +13,13 @@ import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashSet;
 
-@Entity
-@Table(name = "Users")
 /**
  * User entity class
  * @author Noah Rouse
  * @email noahrouse36@gmail.com
  */
+@Entity
+@Table(name = "Users")
 public class User {
    public User () {}
 

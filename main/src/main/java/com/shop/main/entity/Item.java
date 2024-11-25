@@ -11,13 +11,13 @@ import jakarta.persistence.Table;
 
 import java.math.BigDecimal;
 
-@Entity
-@Table(name = "Items")
 /**
  * Item entity class to hold products for order
  * @author Noah Rouse
  * @email noahrouse36@gmail.com
  */
+@Entity
+@Table(name = "Items")
 public class Item {
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)

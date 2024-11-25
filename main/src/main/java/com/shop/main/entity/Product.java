@@ -11,13 +11,13 @@ import jakarta.persistence.Table;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-@Entity
-@Table(name = "Products")
 /**
  * Product class to handle product entity
  * @author Noah Rouse
  * @email noahrouse36@gmail.com
  */
+@Entity
+@Table(name = "Products")
 public class Product {
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)

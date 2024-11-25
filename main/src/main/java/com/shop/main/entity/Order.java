@@ -14,13 +14,14 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
-@Entity
-@Table(name = "Orders")
+
 /**
  * Order class to order a single product
  * @author Noah Rouse
  * @email: noahrouse36@gmail.com
  */
+@Entity
+@Table(name = "Orders")
 public class Order {
    @Id
    @GeneratedValue(strategy=GenerationType.IDENTITY)
