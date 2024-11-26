@@ -8,12 +8,14 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 
 import java.time.LocalDate;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
 
 /**
@@ -61,7 +63,6 @@ public class User {
    @Column(name = "firstName", nullable = false)
    private String firstName;
 
-
    @Column(name = "lastName", nullable = false)
    private String lastName;
 
@@ -83,6 +84,10 @@ public class User {
    @OneToOne(cascade = CascadeType.ALL)
    @JoinColumn(name = "cart_id")
    private Cart cart;
+
+   @OneToMany(cascade = CascadeType.ALL)
+   @JoinColumn(name = "order_id")
+   private HashMap<Long, Order> orders;
 
    // GETTERS
 
