@@ -1,10 +1,13 @@
 package com.shop.main.entity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
@@ -21,7 +24,10 @@ import java.util.HashSet;
 @Entity
 @Table(name = "Users")
 public class User {
-   public User () {}
+   public User () {
+      this.roles = new HashSet<Role>();
+      this.cart = new Cart();
+   }
 
    public User (final String userName, final String password, final String email,
          final String firstName, final String lastName) {
@@ -33,6 +39,8 @@ public class User {
       this.lastName = lastName;
       this.createdDate = LocalDate.now();
       this.lastUpdated = createdDate;
+      this.roles = new HashSet<Role>();
+      this.cart = new Cart();
    }
 
    @Id
@@ -71,6 +79,10 @@ public class User {
 
    @Column(name = "roles", nullable = true)
    private HashSet<Role> roles;
+
+   @OneToOne(cascade = CascadeType.ALL)
+   @JoinColumn(name = "cart_id")
+   private Cart cart;
 
    // GETTERS
 
@@ -114,6 +126,10 @@ public class User {
       return this.roles;
    }
 
+   public Cart getCart () {
+      return this.cart;
+   }
+
    // SETTERS
 
    public void setUserName (final String userName) {
@@ -152,6 +168,10 @@ public class User {
       this.roles = roles;
    }
 
+   public void setCart (final Cart cart) {
+      this.cart = cart;
+   }
+ 
    // UPDATE
 
    @PreUpdate
