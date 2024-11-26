@@ -1,4 +1,4 @@
-package com.shop.repository;
+package com.shop.main.repository;
 
 import com.shop.main.entity.Order;
 
