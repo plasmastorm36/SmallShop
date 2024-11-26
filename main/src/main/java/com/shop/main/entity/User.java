@@ -1,8 +1,12 @@
 package com.shop.main.entity;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -80,6 +84,9 @@ public class User {
    @Column(name = "lastUpdated", nullable = false)
    private LocalDate lastUpdated;
 
+   @Enumerated(EnumType.STRING)
+   @ElementCollection(targetClass = Role.class)
+   @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
    @Column(name = "roles", nullable = true)
    private HashSet<Role> roles;
 
