@@ -1,6 +1,5 @@
 package com.shop.repository;
 
-import com.shop.main.entity.Order;
 import com.shop.main.entity.User;
 
 import org.springframework.data.jpa.repository.JpaRepository;
