@@ -26,7 +26,7 @@ public class Cart {
    private long id;
 
    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-   @JoinColumn(name = "items_id")
+   @JoinColumn(name = "cart_id")
    private List<Item> items;
 
    @Column(name = "totalPrice")

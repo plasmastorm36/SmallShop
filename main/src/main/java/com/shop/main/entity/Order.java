@@ -29,7 +29,7 @@ public class Order {
    private long id;
 
    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-   @JoinColumn(name = "item_id")
+   @JoinColumn(name = "order_id")
    private List<Item> items;
 
    @Column(name = "price", nullable = false)
