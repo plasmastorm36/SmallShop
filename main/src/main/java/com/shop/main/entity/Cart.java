@@ -60,7 +60,7 @@ public class Cart {
 
    public void addItem (final Item item) {
       this.items.add(item);
-      this.totalPrice.add(item.getPrice());
+      this.totalPrice = this.totalPrice.add(item.getPrice());
    }
 
    public void calculateTotalPrice () {
