@@ -11,7 +11,9 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 import java.math.BigDecimal;
+import java.util.LinkedList;
 import java.util.List;
+
 /**
  * Cart entity class to handle multiple purchases
  * @author Noah Ruse
@@ -34,6 +36,7 @@ public class Cart {
 
    public Cart () {
       this.totalPrice = BigDecimal.ZERO;
+      this.items = new LinkedList<Item>();
    }
 
    // GETTERS
