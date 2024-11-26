@@ -1,5 +1,6 @@
 package com.shop.repository;
 
+import com.shop.main.entity.Order;
 import com.shop.main.entity.User;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -16,9 +17,9 @@ import java.util.Optional;
  */
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-   @Query("SELECT u FROM Users WHERE u.userName = :userName")
+   @Query("SELECT u FROM User u WHERE u.userName = :userName")
    public Optional<User> findByUserName (final String userName);
 
-   @Query("SELECT u from Users WHERE u.email = :email")
+   @Query("SELECT u from User u WHERE u.email = :email")
    public List<User> findByEmail (final String email);
 }
