@@ -14,8 +14,8 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.HashSet;
 
 /**
@@ -29,6 +29,7 @@ public class User {
    public User () {
       this.roles = new HashSet<Role>();
       this.cart = new Cart();
+      this.orders = new ArrayList<Order>();
    }
 
    public User (final String userName, final String password, final String email,
@@ -43,6 +44,7 @@ public class User {
       this.lastUpdated = createdDate;
       this.roles = new HashSet<Role>();
       this.cart = new Cart();
+      this.orders = new ArrayList<Order>();
    }
 
    @Id
@@ -87,7 +89,7 @@ public class User {
 
    @OneToMany(cascade = CascadeType.ALL)
    @JoinColumn(name = "order_id")
-   private HashMap<Long, Order> orders;
+   private ArrayList<Order> orders;
 
    // GETTERS
 
@@ -135,6 +137,10 @@ public class User {
       return this.cart;
    }
 
+   public ArrayList<Order> getOrders () {
+      return this.orders;
+   }
+
    // SETTERS
 
    public void setUserName (final String userName) {
@@ -176,6 +182,10 @@ public class User {
    public void setCart (final Cart cart) {
       this.cart = cart;
    }
+
+   public void setOrders (final ArrayList<Order> orders) {
+      this.orders = orders;
+   }
  
    // UPDATE
 
@@ -208,5 +218,9 @@ public class User {
 
    public void removeAllRoles () {
       this.roles.removeAll(roles);
+   }
+
+   public void addOrder (final Order order) {
+      this.orders.add(order);
    }
 }
