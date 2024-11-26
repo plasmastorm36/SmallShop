@@ -32,6 +32,10 @@ public class Cart {
    @Column(name = "totalPrice")
    private BigDecimal totalPrice;
 
+   public Cart () {
+      this.totalPrice = BigDecimal.ZERO;
+   }
+
    // GETTERS
 
    public long getId () {
