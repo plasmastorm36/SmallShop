@@ -68,9 +68,9 @@ public class Cart {
    }
 
    public void calculateTotalPrice () {
-      final BigDecimal total = new BigDecimal(0);
+      BigDecimal total = new BigDecimal(0);
       for (final Item item: items) {
-         total.add(item.getPrice());
+         total = total.add(item.getPrice());
       }
 
       this.totalPrice = total;
