@@ -71,4 +71,8 @@ public class Item {
    public void calculatePrice () {
       this.price = product.getPrice().multiply(new BigDecimal(amount));
    }
+
+   public boolean equals (final Item item) {
+      return this.id == item.getId();
+   }
 }

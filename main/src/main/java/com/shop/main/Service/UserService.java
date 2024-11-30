@@ -50,6 +50,11 @@ public class UserService {
       repos.save(user);
    }
 
+   public void clearUserCart (final User user) {
+      user.getCart().clear();
+      repos.save(user);
+   }
+
    /**
     * 
     * @param user
@@ -119,6 +124,16 @@ public class UserService {
 
       throw new EntityNotFoundException(String.format("User with username %s not found",
             userName));
+   }
+
+   /**
+    * 
+    * @param user
+    * @param item
+    */
+   public void removeItemFromUserCart (final User user, final Item item) {
+      user.getCart().removeItem(item);
+      repos.save(user);
    }
 
    /**

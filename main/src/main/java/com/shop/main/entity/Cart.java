@@ -78,4 +78,15 @@ public class Cart {
 
       this.totalPrice = total;
    }
+
+   /**
+    * Removes all items from the cart
+    */
+   public void clear () {
+      this.items.clear();
+   }
+
+   public void removeItem (final Item item) {
+      this.items.remove(item);
+   }
 }
