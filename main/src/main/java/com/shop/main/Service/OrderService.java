@@ -1,4 +1,4 @@
-package com.shop.main.Service;
+package com.shop.main.service;
 
 import com.shop.main.entity.Item;
 import com.shop.main.entity.Order;

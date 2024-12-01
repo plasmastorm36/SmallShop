@@ -61,6 +61,10 @@ public class Product {
       return this.price;
    }
 
+   public int getQuantity () {
+      return this.quantity;
+   }
+
    public LocalDate getCreatedDate () {
       return this.createdDate;
    }
@@ -81,6 +85,10 @@ public class Product {
 
    public void setPrice (final BigDecimal price) {
       this.price = price;
+   }
+
+   public void setQuantity (final int quantity) {
+      this.quantity = quantity;
    }
 
    public void setCreatedDate (final LocalDate createdDate) {

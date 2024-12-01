@@ -1,9 +1,10 @@
-package com.shop.main.Service;
+package com.shop.main.service;
 
 import com.shop.main.entity.Item;
 import com.shop.main.entity.Order;
 import com.shop.main.entity.Role;
 import com.shop.main.entity.User;
+import com.shop.main.exception.InsufficientStockException;
 import com.shop.main.repository.UserRepository;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -131,6 +132,10 @@ public class UserService {
       final Order order = new Order(user.getCart().getItems());
       user.addOrder(order);
       for (final Item i: order.getItems()) {
+         if (i.getAmount() > i.getProduct().getQuantity()) {
+            throw new InsufficientStockException(String.format("Not enough stock in %s",
+                  i.getProduct().getName()));
+         }
          i.getProduct().subtractQuantity(i.getAmount());
       }
       user.getCart().clear();
