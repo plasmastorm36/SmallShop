@@ -23,6 +23,17 @@ import java.util.List;
 @Entity
 @Table(name = "Orders")
 public class Order {
+
+   public Order () {}
+
+   public Order (final List<Item> items) {
+      BigDecimal price = BigDecimal.ZERO;
+      for (final Item i: items) {
+         price = price.add(i.getPrice());
+      }
+      this.price = price;
+      this.orderDate = LocalDate.now();
+   }
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
    @Column(name="id", nullable = false)
@@ -37,6 +48,8 @@ public class Order {
 
    @Column(name = "orderDate", nullable = false)
    private LocalDate orderDate;
+
+   // GETTERS
 
    public long getId () {
       return this.id;
@@ -53,6 +66,8 @@ public class Order {
    public LocalDate getOrderDate() {
       return this.orderDate;
    }
+
+   // SETTERS
 
    public void setItems (final List<Item> items) {
       this.items = items;

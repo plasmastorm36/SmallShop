@@ -1,6 +1,7 @@
 package com.shop.main.Service;
 
 import com.shop.main.entity.Item;
+import com.shop.main.entity.Order;
 import com.shop.main.entity.Role;
 import com.shop.main.entity.User;
 import com.shop.main.repository.UserRepository;
@@ -124,6 +125,15 @@ public class UserService {
 
       throw new EntityNotFoundException(String.format("User with username %s not found",
             userName));
+   }
+
+   public void purchaseCart (final User user) {
+      final Order order = new Order(user.getCart().getItems());
+      user.addOrder(order);
+      for (final Item i: order.getItems()) {
+         i.getProduct().subtractQuantity(i.getAmount());
+      }
+      user.getCart().clear();
    }
 
    /**

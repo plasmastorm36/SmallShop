@@ -93,6 +93,10 @@ public class Product {
 
    // MISC
 
+   public void subtractQuantity(final int amount) {
+      this.quantity -= amount;
+   }
+
    @PreUpdate
    public void updateLastUpdated () {
       this.lastUpdated = LocalDate.now();
