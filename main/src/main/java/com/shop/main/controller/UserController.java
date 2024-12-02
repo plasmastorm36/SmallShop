@@ -1,5 +1,6 @@
 package com.shop.main.controller;
 
+import com.shop.main.dto.PurchaseRequest;
 import com.shop.main.entity.Item;
 import com.shop.main.entity.User;
 import com.shop.main.exception.InsufficientStockException;
@@ -61,14 +62,14 @@ public class UserController {
 
    @PostMapping("/{userid}/purchase-item")
    public ResponseEntity<String> purchaseItem (final @PathVariable long userId,
-         final @RequestBody Item item, final @RequestBody boolean isVerified) {
-      if (!isVerified) {
+         final @RequestBody PurchaseRequest request) {
+      if (!request.isVerified()) {
          return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Purchase not verified");
       }
       try {
          final User user = service.findById(userId);
-         service.purchaseItem(item, user);
-         return ResponseEntity.ok("Purchase completed successfully")
+         service.purchaseItem(request.getItem(), user);
+         return ResponseEntity.ok("Purchase completed successfully");
       } catch (final EntityNotFoundException e) {
          return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
       }
