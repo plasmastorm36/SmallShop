@@ -36,10 +36,10 @@ public class User {
       this.orders = new ArrayList<Order>();
    }
 
-   public User (final String userName, final String password, final String email,
+   public User (final String username, final String password, final String email,
          final String firstName, final String lastName) {
 
-      this.userName = userName;
+      this.username = username;
       this.password = password;
       this.email = email;
       this.firstName = firstName;
@@ -57,7 +57,7 @@ public class User {
    private Long id;
 
    @Column(name = "userName", nullable = false, unique = true)
-   private String userName;
+   private String username;
 
    @Column(name = "password", nullable = false)
    private String password;
@@ -104,8 +104,8 @@ public class User {
       return this.id;
    }
 
-   public String getUserName () {
-      return this.userName;
+   public String getUsername () {
+      return this.username;
    }
 
    public String getPassword () {
@@ -150,8 +150,8 @@ public class User {
 
    // SETTERS
 
-   public void setUserName (final String userName) {
-      this.userName = userName;
+   public void setUsername (final String userName) {
+      this.username = userName;
    }
 
    public void setPassword (final String password) {

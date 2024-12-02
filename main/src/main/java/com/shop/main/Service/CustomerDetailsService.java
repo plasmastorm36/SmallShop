@@ -31,7 +31,7 @@ public class CustomerDetailsService implements UserDetailsService {
                userName));
       }
 
-      return User.builder().username(user.get().getUserName())
+      return User.builder().username(user.get().getUsername())
             .password(user.get().getPassword()).roles("USER").build();
    }
 }

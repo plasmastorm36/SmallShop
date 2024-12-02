@@ -113,7 +113,8 @@ public class UserController {
    }
 
    @PutMapping("/{userid}/update-username")
-   public ResponseEntity<String> updateUsername (final @PathVariable long userId, final @RequestBody String username) {
+   public ResponseEntity<String> updateUsername (final @PathVariable long userId,
+         final @RequestBody String username) {
       try {
          final User user = service.findById(userId);
          service.updateUserUsername(user, username);

@@ -205,7 +205,7 @@ public class UserService {
     * @param username
     */
    public void updateUserUsername (final User user, final String username) {
-      user.setUserName(username);
+      user.setUsername(username);
       repos.save(user);
    }
 }
