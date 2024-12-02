@@ -10,6 +10,7 @@ import com.shop.main.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.constraints.Email;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -128,6 +129,10 @@ public class UserService {
             userName));
    }
 
+   /**
+    * clears cart if purchase can be made and makes receipt
+    * @param user
+    */
    public void purchaseCart (final User user) {
       final Order order = new Order(user.getCart().getItems());
       user.addOrder(order);
@@ -140,6 +145,19 @@ public class UserService {
       }
       user.getCart().clear();
    }
+
+   /**
+    * purchases a single item and create a receipt for it
+    * @param item
+    * @param user
+    */
+   public void purchaseItem (final Item item, final User user) {
+      final ArrayList<Item> items = new ArrayList<>(1);
+      items.add(item);
+      final Order order = new Order(items);
+      user.addOrder(order);
+      repos.save(user);
+   } 
 
    /**
     * 
