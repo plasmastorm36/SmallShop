@@ -1,5 +1,6 @@
 package com.shop.main.controller;
 
+import com.shop.main.dto.CreateProductRequest;
 import com.shop.main.entity.Product;
 import com.shop.main.service.ProductService;
 
@@ -48,7 +49,11 @@ public class ProductController {
 
    // check to see if this will work with the id generator
    @PostMapping("/add")
-   public ResponseEntity<String> addProduct (final @RequestBody Product product) {
+   public ResponseEntity<String> addProduct (final @RequestBody CreateProductRequest req) {
+      final Product product = new Product();
+      product.setName(req.getName());
+      product.setPrice(req.getPrice());
+      product.setQuantity(req.getQuantity());
       service.addProduct(product);
       return ResponseEntity.status(HttpStatus.CREATED).body("Product added successfully");
    }

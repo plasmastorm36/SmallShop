@@ -8,6 +8,8 @@ import com.shop.main.service.UserService;
 
 import jakarta.persistence.EntityNotFoundException;
 
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +18,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.GetMapping;
+
 
 /**
  * Controller for user entity
@@ -28,6 +32,20 @@ public class UserController {
    private final UserService userService;
    public UserController (final UserService userService) {
       this.userService = userService;
+   }
+
+   @GetMapping("/all")
+   public List<User> getAll () {
+      return userService.findAllUsers();
+   }
+   
+   @GetMapping("/find-by-username/{username}")
+   public ResponseEntity<?> getByUsername (final @PathVariable String username) {
+      try {
+         return ResponseEntity.ok(userService.findByUsername(username));
+      } catch (final EntityNotFoundException e) {
+         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+      }
    }
 
    @PostMapping("/{userid}/add-to-cart/")

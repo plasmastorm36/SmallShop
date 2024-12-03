@@ -22,11 +22,12 @@ public class LoginService {
       this.encoder = encoder;
    }
 
-   public boolean authenticate (final String username, final String password) {
-      final Optional<User> user = repos.findByUserName(username);
-      if (user.isPresent()) {
+   public boolean authenticate (final String username, final String password) throws Exception {
+      final Optional<User> user = repos.findByUsername(username);
+      if (user.isPresent()) { 
          return encoder.matches(password, user.get().getPassword());
       }
+      System.out.println("Repos is failing at its job");
       return false;
    }
 }

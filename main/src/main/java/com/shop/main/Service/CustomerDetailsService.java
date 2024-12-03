@@ -22,13 +22,13 @@ public class CustomerDetailsService implements UserDetailsService {
       this.repos = userRepository;
    }
 
-   public UserDetails loadUserByUsername (final String userName) 
+   public UserDetails loadUserByUsername (final String username) 
          throws UsernameNotFoundException {
-      final Optional<com.shop.main.entity.User> user = repos.findByUserName(userName);
+      final Optional<com.shop.main.entity.User> user = repos.findByUsername(username);
 
       if (!user.isPresent()) {
          throw new UsernameNotFoundException(String.format("User with username %s not found",
-               userName));
+               username));
       }
 
       return User.builder().username(user.get().getUsername())

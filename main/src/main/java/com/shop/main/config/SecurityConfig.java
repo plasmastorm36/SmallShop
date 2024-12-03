@@ -5,6 +5,7 @@ import com.shop.main.service.CustomerDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -34,12 +35,13 @@ public class SecurityConfig {
    @Bean
    public SecurityFilterChain securityFilterChain (final HttpSecurity http) throws Exception {
       http.csrf(crsf -> crsf.disable())
-            .authorizeHttpRequests(authorize -> authorize.requestMatchers("/public/**")
-            .permitAll().requestMatchers("/users/**").authenticated()
+            .authorizeHttpRequests(authorize -> authorize.requestMatchers("/**")
+            .permitAll().requestMatchers("/users/**").permitAll()
             .requestMatchers("/products/all", "/products/id-search/**",
             "/products/find-by-name/**").permitAll()
-            .requestMatchers("/register").permitAll())
-            .formLogin(formLogin -> formLogin.permitAll())
+            .requestMatchers("/register").permitAll()
+            .requestMatchers("/login").permitAll())
+            .httpBasic(Customizer.withDefaults())
             .logout(logout -> logout.logoutUrl("/logout").logoutSuccessUrl("/"));
 
       return http.build();

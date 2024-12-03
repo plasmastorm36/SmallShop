@@ -1,5 +1,6 @@
 package com.shop.main.controller;
 
+import com.shop.main.dto.LoginRequest;
 import com.shop.main.dto.RegisterRequest;
 import com.shop.main.service.LoginService;
 import com.shop.main.service.UserService;
@@ -10,7 +11,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -39,9 +39,10 @@ public class LoginController {
     * @return
     */
    @PostMapping("/login")
-   public ResponseEntity<String> login (final @RequestParam String username, final @RequestParam String password) {
-      if (loginService.authenticate(username, password)) {
-         UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+   public ResponseEntity<String> login (final @RequestBody LoginRequest request) throws Exception {
+      if (loginService.authenticate(request.getUsername(), request.getPassword())) {
+         UserDetails userDetails = userDetailsService.loadUserByUsername(request
+               .getUsername());
          
          // Authentication object with proper roles
          UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(

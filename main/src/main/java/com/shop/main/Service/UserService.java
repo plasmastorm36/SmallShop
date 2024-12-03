@@ -26,7 +26,6 @@ import org.springframework.stereotype.Service;
 public class UserService {
    private final UserRepository repos;
    private final PasswordEncoder encoder;
-
    /**
     * Constructor should be auto injected by Spring when run with maven
     * @param repository
@@ -122,15 +121,15 @@ public class UserService {
     * @return
     * @throws EntityNotFoundException if user is not found
     */
-   public User findByUsername (final String userName) throws EntityNotFoundException {
-      final Optional<User> user = repos.findByUserName(userName);
-
+   public User findByUsername (final String username) throws EntityNotFoundException {
+      final Optional<User> user = repos.findByUsername(username);
+      System.out.println(user.toString());
       if (user.isPresent()) {
          return user.get();
       }
 
       throw new EntityNotFoundException(String.format("User with username %s not found",
-            userName));
+            username));
    }
 
    /**
