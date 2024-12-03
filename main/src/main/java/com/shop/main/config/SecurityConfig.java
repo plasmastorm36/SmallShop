@@ -35,7 +35,9 @@ public class SecurityConfig {
    public SecurityFilterChain securityFilterChain (final HttpSecurity http) throws Exception {
       http.csrf(crsf -> crsf.disable())
             .authorizeHttpRequests(authorize -> authorize.requestMatchers("/public/**")
-            .permitAll().requestMatchers("/users/**").authenticated())
+            .permitAll().requestMatchers("/users/**").authenticated()
+            .requestMatchers("/products/all", "/products/id-search/**",
+            "products/find-by-name/**"))
             .formLogin(formLogin -> formLogin.permitAll())
             .logout(logout -> logout.logoutUrl("/logout").logoutSuccessUrl("/"));
 

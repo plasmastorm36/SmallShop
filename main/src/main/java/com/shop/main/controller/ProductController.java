@@ -32,7 +32,7 @@ public class ProductController {
       return service.findAllProducts();
    }
    
-   @GetMapping("/{id}")
+   @GetMapping("/id-search/{id}")
    public ResponseEntity<?> getProductById (final @PathVariable long id) {
       try {
          return ResponseEntity.ok(service.findProductById(id));
