@@ -21,6 +21,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * User entity class
@@ -38,7 +40,6 @@ public class User {
 
    public User (final String username, final String password, final String email,
          final String firstName, final String lastName) {
-
       this.username = username;
       this.password = password;
       this.email = email;
@@ -88,7 +89,7 @@ public class User {
    @ElementCollection(targetClass = Role.class)
    @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
    @Column(name = "roles", nullable = true)
-   private HashSet<Role> roles;
+   private Set<Role> roles;
 
    @OneToOne(cascade = CascadeType.ALL)
    @JoinColumn(name = "cart_id")
@@ -96,7 +97,7 @@ public class User {
 
    @OneToMany(cascade = CascadeType.ALL)
    @JoinColumn(name = "order_id")
-   private ArrayList<Order> orders;
+   private List<Order> orders;
 
    // GETTERS
 
@@ -136,7 +137,7 @@ public class User {
       return this.lastUpdated;
    }
 
-   public HashSet<Role> getRoles () {
+   public Set<Role> getRoles () {
       return this.roles;
    }
 
@@ -144,7 +145,7 @@ public class User {
       return this.cart;
    }
 
-   public ArrayList<Order> getOrders () {
+   public List<Order> getOrders () {
       return this.orders;
    }
 

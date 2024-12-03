@@ -37,7 +37,8 @@ public class SecurityConfig {
             .authorizeHttpRequests(authorize -> authorize.requestMatchers("/public/**")
             .permitAll().requestMatchers("/users/**").authenticated()
             .requestMatchers("/products/all", "/products/id-search/**",
-            "/products/find-by-name/**").permitAll())
+            "/products/find-by-name/**").permitAll()
+            .requestMatchers("/register").permitAll())
             .formLogin(formLogin -> formLogin.permitAll())
             .logout(logout -> logout.logoutUrl("/logout").logoutSuccessUrl("/"));
 

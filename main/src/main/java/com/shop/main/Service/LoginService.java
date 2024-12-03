@@ -5,6 +5,7 @@ import com.shop.main.repository.UserRepository;
 
 import java.util.Optional;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 /**
@@ -15,14 +16,16 @@ import org.springframework.stereotype.Service;
 @Service
 public class LoginService {
    private final UserRepository repos;
-   public LoginService (final UserRepository repository) {
+   private final PasswordEncoder encoder;
+   public LoginService (final UserRepository repository, final PasswordEncoder encoder) {
       this.repos = repository;
+      this.encoder = encoder;
    }
 
    public boolean authenticate (final String username, final String password) {
       final Optional<User> user = repos.findByUserName(username);
       if (user.isPresent()) {
-         return user.get().getPassword().equals(password);
+         return encoder.matches(password, user.get().getPassword());
       }
       return false;
    }

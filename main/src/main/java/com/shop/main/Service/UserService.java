@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 /**
@@ -24,13 +25,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService {
    private final UserRepository repos;
+   private final PasswordEncoder encoder;
 
    /**
     * Constructor should be auto injected by Spring when run with maven
     * @param repository
     */
-   public UserService (final UserRepository repository) {
+   public UserService (final UserRepository repository, final PasswordEncoder encoder) {
       this.repos = repository;
+      this.encoder = encoder;
    }
 
    /**
@@ -77,7 +80,8 @@ public class UserService {
     */
    public void createUser (final String userName, final String password,
          @Email final String email, final String firstName, final String lastName) {
-      final User user = new User(userName, password, email, firstName, lastName);
+      final User user = new User(userName, encoder.encode(password), email, firstName,
+            lastName);
       repos.save(user);
    }
 
