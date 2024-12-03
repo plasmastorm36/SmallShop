@@ -25,17 +25,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/users")
 public class UserController {
-   private final UserService service;
+   private final UserService userService;
    public UserController (final UserService userService) {
-      this.service = userService;
+      this.userService = userService;
    }
 
    @PostMapping("/{userid}/add-to-cart/")
    public ResponseEntity<String> addToCart (final @PathVariable long userId,
          final @RequestBody Item item) {
       try {
-         final User user = service.findById(userId);
-         service.addToUserCart(item, user);
+         final User user = userService.findById(userId);
+         userService.addToUserCart(item, user);
          return ResponseEntity.ok("Item successfully added to cart");
       } catch (final EntityNotFoundException e) {
          return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
@@ -50,8 +50,8 @@ public class UserController {
          return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Purchase not verified");
       }
       try {
-         final User user = service.findById(userId);
-         service.purchaseCart(user);
+         final User user = userService.findById(userId);
+         userService.purchaseCart(user);
          return ResponseEntity.ok("Purchase completed successfully");
       } catch (final EntityNotFoundException e) {
          return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
@@ -67,8 +67,8 @@ public class UserController {
          return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Purchase not verified");
       }
       try {
-         final User user = service.findById(userId);
-         service.purchaseItem(request.getItem(), user);
+         final User user = userService.findById(userId);
+         userService.purchaseItem(request.getItem(), user);
          return ResponseEntity.ok("Purchase completed successfully");
       } catch (final EntityNotFoundException e) {
          return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
@@ -79,8 +79,8 @@ public class UserController {
    public ResponseEntity<String> removeFromCart (final @PathVariable long userId,
          final @RequestBody Item item) {
       try {
-         final User user = service.findById(userId);
-         service.removeItemFromUserCart(user, item);
+         final User user = userService.findById(userId);
+         userService.removeItemFromUserCart(user, item);
          // NOTE: if the item is not in the cart nothing will be done
          return ResponseEntity.ok("Item removed successfully");
       } catch (final EntityNotFoundException e) {
@@ -92,8 +92,8 @@ public class UserController {
    public ResponseEntity<String> updateEmail(final @PathVariable long userId,
          final @RequestBody String email) {
       try {
-         final User user = service.findById(userId);
-         service.updateUserEmail(user, email);
+         final User user = userService.findById(userId);
+         userService.updateUserEmail(user, email);
          return ResponseEntity.ok("Email updated successfully");
       } catch (final EntityNotFoundException e) {
          return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
@@ -104,8 +104,8 @@ public class UserController {
    public ResponseEntity<String> updatePhoneNumber(final @PathVariable long userId,
          final @RequestBody String phoneNumber) {
       try {
-         final User user = service.findById(userId);
-         service.updateUserPhoneNumber(user, phoneNumber);
+         final User user = userService.findById(userId);
+         userService.updateUserPhoneNumber(user, phoneNumber);
          return ResponseEntity.ok("Phone number updated successfully");
       } catch (final EntityNotFoundException e) {
          return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
@@ -116,8 +116,8 @@ public class UserController {
    public ResponseEntity<String> updateUsername (final @PathVariable long userId,
          final @RequestBody String username) {
       try {
-         final User user = service.findById(userId);
-         service.updateUserUsername(user, username);
+         final User user = userService.findById(userId);
+         userService.updateUserUsername(user, username);
          return ResponseEntity.ok("Username updated successfully");
       } catch (final EntityNotFoundException e) {
          return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
