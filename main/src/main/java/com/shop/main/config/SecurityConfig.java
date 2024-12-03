@@ -36,7 +36,7 @@ public class SecurityConfig {
       http.csrf(crsf -> crsf.disable())
             .authorizeHttpRequests(authorize -> authorize.requestMatchers("/public/**")
             .permitAll().requestMatchers("/users/**").authenticated())
-            .formLogin(formLogin -> formLogin.loginPage("/login").permitAll())
+            .formLogin(formLogin -> formLogin.permitAll())
             .logout(logout -> logout.logoutUrl("/logout").logoutSuccessUrl("/"));
 
       return http.build();
