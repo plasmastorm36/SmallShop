@@ -8,6 +8,7 @@ import jakarta.persistence.EntityNotFoundException;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
+import java.time.LocalDate;
 
 import org.springframework.stereotype.Service;
 
@@ -24,6 +25,8 @@ public class ProductService {
    }
 
    public void addProduct (final Product product) {
+      product.setCreatedDate(LocalDate.now());
+      product.setLastUpdated(LocalDate.now());
       repos.save(product);
    }
 
@@ -50,11 +53,13 @@ public class ProductService {
 
    public void updateProductPrice (final Product product, final BigDecimal price) {
       product.setPrice(price);
+      product.setLastUpdated(LocalDate.now());
       repos.save(product);
    }
 
    public void updateProductQuantity (final Product product, final int quantity) {
       product.setQuantity(quantity);
+      product.setLastUpdated(LocalDate.now());
       repos.save(product);
    }
 }
