@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.4.0</version>
+		<version>3.4.1</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.shop</groupId>
@@ -72,8 +72,7 @@
 			</plugin>
 			<plugin>
       		<groupId>org.apache.maven.plugins</groupId>
-      		<artifactId>maven-javadoc-plugin</artifactId>
-      		<version>3.3.0</version> <!-- Use the appropriate version -->
+      		<artifactId>maven-javadoc-plugin</artifactId> <!-- Use the appropriate version -->
       		<executions>
          		<execution>
             		<goals>
